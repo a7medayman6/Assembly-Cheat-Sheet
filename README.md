@@ -13,8 +13,9 @@
 ; no memory to memory arithmetic
 inc dest 		; increase dest by 1
 dec dest 		; decrease dest by 1 
-add dest, src	; add src on dest and store in dest
-sub dest, src	; subtract src from dest and store in dest
+add dest, src		; add src on dest and store in dest
+adc dest, src 		; dest = dest + src + CF
+sub dest, src		; subtract src from dest and store in dest
 neg dest 		; negate dest by finding 2's complement of dest
 ; for mul, imul, div, and idiv no immediate values are permitted 
 mul src 		; unsigned multiplication 
@@ -29,7 +30,12 @@ div src  		; unsigned division
 idiv src 		; signed division
 				; Signed integers must be sign-extended before division takes place.
 				; Fill high byte/word/doubleword with a copy of the low byte/word/doubleword's sign bit
-					; divides AX, DX:AX, or EDX:EAX over 8, 16, or 32-bit operand and store in AL, AX, or EAX the result and in AH, DX, or EDX the reminder
+				; divides AX, DX:AX, or EDX:EAX over 8, 16, or 32-bit operand and store in AL, AX, or EAX the result and in AH, DX, or EDX the reminder
+cbw 			; (convert byte to word) extends AL into AH
+cwd 			; (convert word to doubleword) extends AX into DX
+cdq 			; (convert doubleword to quadword) extends EAX into EDX
+sbb dest, src 		; subtract both the src opernad and CF from dest => dest = dest - src - CF
+
 
 ```
 ## Data transfer
